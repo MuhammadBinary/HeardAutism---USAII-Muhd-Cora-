@@ -20,11 +20,11 @@
 
 # 🌍 The Story Behind Heard
 
-> "The biggest communication problem is we do not listen to understand. We listen to reply."
+> "The project was I spired by watching my younger brother fear playing/interacting with our neighbors autistic child. And that came from the common misconception and stigma surrounding autism.
 
-The project was I spired by watching my younger brother fear playing/interacting with our neighbors autistic child. And that came from the common misconception and stigma surrounding autism.
+We want to give caregivers and most especially parents a clearer signal when words and faces are hard to read."
 
-We want to give caregivers and most especially parents a clearer signal when words and faces are hard to read.
+
 ---
 
 # 🧠 What is Heard?
