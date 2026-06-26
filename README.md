@@ -31,8 +31,6 @@ We want to give caregivers and most especially parents a clearer signal when wor
 
 Heard is an experimental AI wearable system that listens to vocal patterns and predicts emotional states.
 
-It does not analyze words.
-
 It listens to the hidden signals inside sound:
 
 - 🎵 Pitch
@@ -42,18 +40,7 @@ It listens to the hidden signals inside sound:
 
 The AI converts these signals into an emotion prediction.
 
-Then...
-
-A tiny wearable display communicates the result.
-
-A caregiver does not need to ask:
-
-> "What are you feeling?"
-
-The device helps answer:
-
-> "This might be what is happening."
-
+Then... A tiny wearable display communicates the result.
 ---
 
 # ✨ The Vision
@@ -72,64 +59,48 @@ Human Emotion
        |
        v
  8x8 LED Emotion Display
-```
+       |
+    Dashboard   
 
-A wearable translator.
-
-From:
-
-**Invisible feelings**
-
-to
-
-**Visible signals**
-
----
 
 # 🏗️ Architecture
 
 Heard uses a two-stage cross-modal learning approach.
 
 ```
-                 TRAINING ONLY
+                TRAINING ONLY
 
-      Autism Face Dataset
-              |
-              v
-        MobileNetV2
-              |
-              |
-              v
-        Emotion Features
-              |
-              |
+              Autism Face Dataset
+                     |
+                     v
+               MobileNetV2
+                     |
+                     |
+                     v
+               Emotion Features
+                     |
+                     |
 Audio Dataset ---> CNN-GRU ---> Emotion Prediction
 
-
-              |
-              v
-
-        Auxiliary Loss Training
-
-              |
-              v
-
+                     |
+                     v
+               Auxiliary Loss Training
+                     |
+                     v
         Better Audio Understanding
 
 
                  INFERENCE
 
           🎤 Audio Only
+                 |
+                 v
 
-              |
-              v
+            CNN-GRU Model
+                 |
+                 v
 
-          CNN-GRU Model
-
-              |
-              v
-
-        Emotion Animation
+          Emotion Animation
 ```
 
 The face model is a teacher.
@@ -139,7 +110,6 @@ The microphone is the final student.
 During deployment:
 
 📌 No camera  
-📌 No face recognition  
 📌 Only audio
 
 ---
@@ -183,12 +153,7 @@ Useful for:
 Together:
 
 ```
-Audio =
-MFCC
-+
-ZCR
-+
-RMS
+Audio = MFCC + ZCR + RMS
 ```
 
 ---
@@ -198,32 +163,31 @@ RMS
 The final audio model:
 
 ```
-Audio Features
+       Audio Features
+             |
+             v
 
-      |
-      v
-
-1D CNN
-
-      |
-      v
-
-Feature Extraction
-
-      |
-      v
-
-GRU
-
-      |
-      v
-
-Temporal Understanding
-
-      |
-      v
-
-Emotion Classifier
+          1D CNN
+       
+             |
+             v
+       
+       Feature Extraction
+       
+             |
+             v
+       
+            GRU
+       
+             |
+             v
+       
+       Temporal Understanding
+       
+             |
+             v
+       
+       Emotion Classifier
 ```
 
 Why CNN + GRU?
