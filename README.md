@@ -22,31 +22,9 @@
 
 > "The biggest communication problem is we do not listen to understand. We listen to reply."
 
-There is a child in my neighborhood who has autism.
+The project was I spired by watching my younger brother fear playing/interacting with our neighbors autistic child. And that came from the common misconception and stigma surrounding autism.
 
-I watched something that stayed with me.
-
-He communicates.  
-He reacts.  
-He feels.
-
-But the people around him often have to guess:
-
-> Is he happy?  
-> Is he scared?  
-> Is he overwhelmed?  
-> Is something wrong?
-
-And sometimes those guesses are wrong.
-
-That gap — between what someone feels internally and what the world can understand externally — is where **Heard** was born.
-
-Not to fix the child.
-
-Not to replace communication.
-
-But to create a bridge.
-
+We want to give caregivers and most especially parents a clearer signal when words and faces are hard to read.
 ---
 
 # 🧠 What is Heard?
