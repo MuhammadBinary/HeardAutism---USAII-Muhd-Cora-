@@ -1,389 +1,301 @@
-<div align="center">
-
 # 🎧 Heard
 
-### An AI-powered wearable that translates emotions from sound into something humans can understand.
+**An AI-powered wearable that helps caregivers better understand emotional cues through sound.**
 
-<img src="https://img.shields.io/badge/AI-Emotion%20Recognition-purple?style=for-the-badge">
-<img src="https://img.shields.io/badge/Deep%20Learning-CNN--GRU-blue?style=for-the-badge">
-<img src="https://img.shields.io/badge/Hardware-Arduino%20%2B%20LED-green?style=for-the-badge">
-<img src="https://img.shields.io/badge/Built%20for-AI%20for%20Good-red?style=for-the-badge">
-
-<br><br>
-
-**A wearable bridge between an inner emotional world and the people trying to understand it.**
-
-</div>
-
+Heard is designed as an assistive tool that listens to vocal patterns and displays emotional indicators in a simple visual form, helping create moments of understanding when communication is difficult.
 
 ---
 
-# 🌍 The Story Behind Heard
+# 🌍 Why We Built Heard
 
-> The project was inspired by watching my younger brother fear playing/interacting with our neighbors autistic child. And that came from the common misconception and stigma surrounding autism.
+The idea for Heard came from a personal experience.
 
-We want to give caregivers and most especially parents a clearer signal when words and faces are hard to read."
+Growing up, I watched my younger brother feel hesitant about interacting with an autistic child in our neighborhood. Much of that hesitation came from misunderstanding and uncertainty rather than anything the child had done.
 
+That experience highlighted a broader problem: many families, caregivers, and peers struggle to interpret emotional cues when communication happens differently from what they expect.
+
+Heard was created to explore whether AI could provide an additional layer of insight—not to replace human judgment, but to support it.
 
 ---
 
 # 🧠 What is Heard?
 
-Heard is an experimental AI wearable system that listens to vocal patterns and predicts emotional states.
+Heard is an experimental wearable AI system that analyzes audio and predicts emotional states based on vocal characteristics.
 
-It listens to the hidden signals inside sound:
+Instead of focusing on words, it looks at patterns within sound, including:
 
-- 🎵 Pitch
-- ⚡ Energy
-- 🌊 Rhythm
-- 📈 Voice patterns over time
+- Pitch
+- Energy
+- Rhythm
+- Changes in vocal patterns over time
 
-The AI converts these signals into an emotion prediction.
+The system then converts those signals into an emotion prediction and displays the result through a small wearable interface.
 
-Then... A tiny wearable display communicates the result.
 ---
 
-# ✨ The Vision
+# ✨ How It Works
 
 ```
-Human Emotion
-       |
-       v
- 🎤 Microphone
-       |
-       v
+Human Voice
+      |
+      v
+  Microphone
+      |
+      v
  AI Emotion Model
-       |
-       v
+      |
+      v
  Arduino Controller
-       |
-       v
- 8x8 LED Emotion Display
-       |
-    Dashboard   
-
-
-# 🏗️ Architecture
-
-Heard uses a two-stage cross-modal learning approach.
-
+      |
+      v
+ 8x8 LED Display
+      |
+      v
+ Dashboard
 ```
-                TRAINING ONLY
-
-              Autism Face Dataset
-                     |
-                     v
-               MobileNetV2
-                     |
-                     |
-                     v
-               Emotion Features
-                     |
-                     |
-Audio Dataset ---> CNN-GRU ---> Emotion Prediction
-
-                     |
-                     v
-               Auxiliary Loss Training
-                     |
-                     v
-        Better Audio Understanding
-
-
-                 INFERENCE
-
-          🎤 Audio Only
-                 |
-                 v
-
-            CNN-GRU Model
-                 |
-                 v
-
-          Emotion Animation
-```
-
-The face model is a teacher.
-
-The microphone is the final student.
-
-During deployment:
-
-📌 No camera  
-📌 Only audio
 
 ---
 
-# 🎧 Audio Intelligence
+# 🏗️ System Architecture
 
-The audio pipeline extracts:
+Heard uses a cross-modal learning approach during training.
 
-## MFCC
+### Training Phase
 
-A mathematical representation of the sound spectrum.
+```
+           Autism Face Dataset
+                    |
+                    v
+              MobileNetV2
+                    |
+                    v
+            Emotion Features
+                    |
+                    v
 
-It captures:
+Audio Dataset --> CNN-GRU --> Emotion Prediction
+                    |
+                    v
+            Auxiliary Training
+                    |
+                    v
+      Improved Audio Representation
+```
+
+The visual model acts as a teacher during training, helping the audio model learn richer emotional representations.
+
+### Deployment Phase
+
+```
+      Audio Input
+           |
+           v
+       CNN-GRU
+           |
+           v
+   Emotion Prediction
+           |
+           v
+     LED Animation
+```
+
+Only audio is used during real-world operation.
+
+- No camera
+- No facial tracking
+- No video recording
+
+---
+
+# 🎧 Audio Features
+
+The system extracts several key audio features.
+
+### MFCC (Mel-Frequency Cepstral Coefficients)
+
+Captures important characteristics of speech, including:
 
 - Voice texture
 - Frequency patterns
-- Speech characteristics
+- Speech dynamics
 
+### Zero Crossing Rate (ZCR)
 
-## Zero Crossing Rate
+Measures how often an audio signal changes direction.
 
-Measures how often the signal changes direction.
+Useful for identifying:
 
-Useful for:
-
+- Excited speech
 - Harsh sounds
-- Excited sounds
-- Noisy emotional states
+- High-energy vocalizations
 
+### RMS Energy
 
-## RMS Energy
+Measures signal intensity and loudness.
 
-Measures intensity.
+Useful for understanding:
 
-Useful for:
+- Emotional intensity
+- Energy levels
+- Vocal strength
 
-- Loudness
-- Emotional strength
-
-
-Together:
+Combined:
 
 ```
-Audio = MFCC + ZCR + RMS
+Audio Features = MFCC + ZCR + RMS
 ```
 
 ---
 
 # 🧬 Deep Learning Model
 
-The final audio model:
-
 ```
-       Audio Features
-             |
-             v
+    Audio Features
+           |
+           v
 
-          1D CNN
-       
-             |
-             v
-       
-       Feature Extraction
-       
-             |
-             v
-       
-            GRU
-       
-             |
-             v
-       
-       Temporal Understanding
-       
-             |
-             v
-       
-       Emotion Classifier
+        1D CNN
+
+           |
+           v
+
+   Feature Extraction
+
+           |
+           v
+
+          GRU
+
+           |
+           v
+
+ Temporal Understanding
+
+           |
+           v
+
+ Emotion Classifier
 ```
 
-Why CNN + GRU?
+### Why CNN + GRU?
 
-CNN learns:
+The CNN learns meaningful patterns from audio features, while the GRU learns how those patterns evolve over time.
 
-> "What patterns exist?"
-
-GRU learns:
-
-> "How do these patterns change through time?"
-
-Emotion is not a single moment.
-
-Emotion is a sequence.
+Emotion is rarely expressed in a single instant. It develops across a sequence of sounds, pauses, and changes in tone.
 
 ---
 
 # 📊 Results
 
-Final evaluation:
-
 | Emotion | F1 Score |
-|-|-|
+|----------|----------|
 | 😡 Anger | 91% |
 | 😨 Fear | 74% |
 | 😊 Happy | 81% |
 | 😐 Neutral | 80% |
 | 😢 Sad | 77% |
 
-Overall:
+### Overall Performance
 
-## 🚀 81% Test Accuracy
+**81% Test Accuracy**
 
-Speaker-independent evaluation.
+Evaluation was performed using speaker-independent testing to better measure generalization to unseen voices.
 
 ---
 
-# 🔥 The Hardest Problem
+# 🔥 The Biggest Challenge
 
-The biggest challenge:
+One of the hardest parts of this project was data.
 
-There is almost no public dataset of autistic children's emotional audio.
-
-Most emotion datasets contain:
+There are very few publicly available datasets containing emotional audio from autistic children. Most existing emotion datasets rely on:
 
 - Actors
 - Controlled recordings
-- Artificial emotions
+- Simulated emotions
 
+Real emotional expression can vary significantly from person to person, and autistic individuals may communicate emotions differently than conventional datasets suggest.
 
-But autistic expression can be different.
-
-A sound that means happiness for one person may not sound like traditional happiness.
-
-This project does not hide that.
-
-AI should not pretend certainty.
-
-AI should communicate uncertainty.
+Because of this, Heard is designed with caution and transparency in mind.
 
 ---
 
-# 🤔 The Honest AI Principle
+# 🤔 Human-Centered AI
 
-Heard does NOT say:
+Heard does not make absolute claims.
 
-> "This child is definitely scared."
+Instead of saying:
+
+> "This child is scared."
 
 It says:
 
-> "I think this may be fear. Confidence: 61%."
+> "This may indicate fear. Confidence: 61%."
 
-The human remains the decision maker.
+The goal is to provide additional context, not definitive answers.
 
-The AI is a signal.
-
-Not a replacement.
+Human judgment remains essential.
 
 ---
 
 # 🖥️ Hardware Prototype
 
-The physical system:
-
 ```
 Lapel Microphone
-
-       |
-       v
+        |
+        v
 
 Laptop / Edge Device
-
-       |
-       v
+        |
+        v
 
 ONNX AI Model
-
-       |
-       v
+        |
+        v
 
 Arduino UNO
-
-       |
-       v
+        |
+        v
 
 MAX7219 8x8 LED Matrix
 ```
 
-Emotion animations:
-
-😊 Happy
-
-```
-   *
-  ***
- *****
-  ***
-   *
-```
-
-😢 Sad
-
-```
-   *
-   *
-   *
-  ***
- *****
-```
-
-😡 Anger
-
-```
-*     *
- ** **
-  ***
- ** **
-*     *
-```
-
-😨 Fear
-
-```
-* * *
- * *
-* * *
-```
+The LED matrix displays simple emotional animations that can be interpreted quickly and discreetly.
 
 ---
 
-# 🧪 What We Learned
+# 🧪 Key Lesson
 
-The biggest lesson:
+One of the most important lessons from building Heard was that accuracy alone is not enough.
 
-## Better AI is not always more confident AI.
+A useful AI system should also communicate uncertainty when appropriate.
 
-A system that admits:
-
-> "I am uncertain"
-
-can be more useful than a system that confidently gives the wrong answer.
+Sometimes a cautious answer is more valuable than a confident but incorrect one.
 
 ---
 
-# 🚀 Future Versions
+# 🚀 Future Development
 
-Heard v2:
+### Personalized Adaptation
 
-### Personal AI Adaptation
+People express emotions differently.
 
-Every person expresses emotion differently.
-
-Future versions could learn:
-
-"How does THIS child sound when happy?"
-
-"How does THIS child sound when stressed?"
-
----
+Future versions could learn individual emotional patterns over time, allowing the system to better understand how a specific user expresses happiness, stress, frustration, or excitement.
 
 ### Multimodal Understanding
 
-Future sensors:
+Future versions may incorporate additional signals such as:
 
-🎤 Audio  
-⌚ Movement  
-❤️ Physiological signals  
+- Audio
+- Movement
+- Physiological indicators
 
-Because sometimes the strongest emotional signal is not in the voice.
+Combining multiple signals could provide a more complete understanding of emotional state.
 
 ---
 
-# 🏆 Built For
+# 🏆 Project Information
 
-USAII Global AI Hackathon 2026
+**USAII Global AI Hackathon 2026**
 
 Theme:
 
@@ -399,19 +311,17 @@ Community Challenge:
 
 ## AI/ML Empire
 
-**Muhammad Mujahid Haruna**
+### Muhammad Mujahid Haruna
 
-AI Architecture  
-Machine Learning  
-Hardware Integration
+- AI Architecture
+- Machine Learning
+- Hardware Integration
 
+### Cora Zeng
 
-**Cora Zeng**
-
-Research  
-Responsible AI  
-Personalization Strategy
-
+- Research
+- Responsible AI
+- Personalization Strategy
 
 ---
 
@@ -419,27 +329,22 @@ Personalization Strategy
 
 Heard is a research prototype.
 
-It is:
+It is intended to be:
 
-✅ An assistive signal  
-✅ A communication helper  
-✅ A conversation starter  
+- An assistive tool
+- A communication aid
+- A source of additional context
 
+It is not:
 
-It is NOT:
-
-❌ A medical diagnosis tool  
-❌ A replacement for caregivers  
-❌ A perfect emotion detector
+- A medical diagnostic system
+- A replacement for caregivers, parents, or professionals
+- A perfect measure of emotional state
 
 ---
 
-<div align="center">
-
 # ❤️ Heard
 
-### Because every person deserves to be understood.
+**Because understanding should never depend on how easily someone can express themselves.**
 
-Built with curiosity, AI, and the belief that technology should reduce the distance between people.
-
-</div>
+Built with curiosity, empathy, and the belief that technology should help people connect more meaningfully with one another.
