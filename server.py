@@ -1,4 +1,4 @@
-# server.py
+
 from flask import Flask, request, jsonify, render_template_string
 import sqlite3, os, tempfile
 from datetime import datetime
@@ -6,7 +6,6 @@ from datetime import datetime
 app = Flask(__name__)
 DB  = 'heard.db'
 
-# Shared state — demo.py checks this to pause/resume
 state = {'recording': True}
 
 def init_db():
@@ -21,7 +20,7 @@ def init_db():
     conn.close()
 init_db()
 
-# ── LOAD MODEL FOR FILE UPLOAD INFERENCE ──────────────────────────
+# ── LOADING MODEL FOR FILE UPLOAD INFERENCE ──────────────────────────
 _model_run = None
 def get_model():
     global _model_run
@@ -81,7 +80,7 @@ def upload():
     if 'file' not in request.files:
         return jsonify({'error': 'no file'}), 400
 
-    # Read into memory — no temp file, no Windows lock issue
+    # Read into memory
     file_bytes = request.files['file'].read()
 
     try:
