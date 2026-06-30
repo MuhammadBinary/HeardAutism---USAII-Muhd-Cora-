@@ -1,9 +1,8 @@
 #include <LedControl.h>
 
-// LedControl(DIN, CLK, CS, numDevices)
 LedControl lc = LedControl(12, 11, 10, 1);
 
-// ── ANIMATIONS — 2 frames each ────────────────────────────────────
+// -------------- ANIMATIONS - 2 frames each -------------------------
 
 byte happy[2][8] = {
   {0x3C, 0x42, 0xA5, 0x81, 0xBD, 0x81, 0x42, 0x3C},
@@ -20,7 +19,7 @@ byte neutral[2][8] = {
   {0x3C, 0x42, 0x81, 0xA5, 0x81, 0xBD, 0x42, 0x3C}
 };
 
-// ── STATE ──────────────────────────────────────────────────────────
+// -------------------------- STATE ----------------------------
 char currentEmotion = 'N';
 int  frameIdx       = 0;
 unsigned long lastFrame = 0;
@@ -44,7 +43,7 @@ void setup() {
   lc.setIntensity(0, 10);
   lc.clearDisplay(0);
 
-  // Startup sweep — confirms wiring works
+  // Startup sweep
   for (int i = 0; i < 8; i++) {
     lc.setRow(0, i, 0xFF);
     delay(80);
@@ -52,12 +51,11 @@ void setup() {
   delay(400);
   lc.clearDisplay(0);
 
-  // Show neutral pattern so you know it's ready
   showFrame(neutral[0]);
 }
 
 void loop() {
-  // Read serial — flush buffer, keep only latest command
+  // Read serial
   char cmd = 0;
   while (Serial.available() > 0) {
     char c = Serial.read();
