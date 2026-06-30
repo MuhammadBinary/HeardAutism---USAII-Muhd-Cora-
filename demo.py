@@ -18,7 +18,6 @@ SILENCE_THRESHOLD = 0.012
 CONFIDENCE_MIN    = 0.60
 STREAK_NEEDED     = 2
 
-# Serial port shared between main thread and sync thread
 _ser      = None
 _ser_lock = threading.Lock()
 
@@ -77,10 +76,6 @@ def send_serial(code):
                 pass
 
 # ── BACKGROUND THREAD ─────────────────────────────────────────────
-# Runs forever regardless of pause state
-# Polls /latest every 2 seconds and forwards emotion to Arduino
-# This means file uploads from dashboard ALSO trigger the display
-# without needing the mic to be active
 
 def arduino_sync_thread():
     last_sent = None
@@ -126,7 +121,6 @@ def main():
         print(Fore.YELLOW + "  No Arduino found — predictions still log to dashboard")
         _ser = None
 
-    # Start sync thread — always runs, handles both mic and file upload paths
     sync = threading.Thread(target=arduino_sync_thread, daemon=True)
     sync.start()
     print(Fore.GREEN + "  Arduino sync thread running")
@@ -179,7 +173,7 @@ def main():
                 color = Fore.WHITE + Style.DIM
                 note  = 'waiting' if streak < STREAK_NEEDED else 'low conf'
 
-            # Send to server — sync thread will pick it up and forward to Arduino
+            # Send to server
             send_to_server(emo, conf)
 
             print(f'  {color + Style.BRIGHT}{"voice":<14}{emo:<12}'
