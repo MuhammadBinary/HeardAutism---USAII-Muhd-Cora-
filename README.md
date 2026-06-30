@@ -1,6 +1,6 @@
 # 🎧 Heard
 
-**An AI-powered wearable that helps caregivers better understand emotional cues through sound.**
+**An AI-assistive wearable For Autistic Children**
 
 Heard is designed as an assistive tool that listens to vocal patterns and displays emotional indicators in a simple visual form, helping create moments of understanding when communication is difficult.
 
@@ -12,9 +12,9 @@ The idea for Heard came from a personal experience.
 
 Growing up, I watched my younger brother feel hesitant about interacting with an autistic child in our neighborhood. Much of that hesitation came from misunderstanding and uncertainty rather than anything the child had done.
 
-That experience highlighted a broader problem: many families, caregivers, and peers struggle to interpret emotional cues when communication happens differently from what they expect.
+That experience highlighted a broader problem: many families, and peers struggle to interpret emotional cues when communication happens differently from what they expect.
 
-Heard was created to explore whether AI could provide an additional layer of insight—not to replace human judgment, but to support it.
+Heard was created to explore whether AI could provide an additional layer of insight.
 
 ---
 
@@ -223,14 +223,6 @@ Because of this, Heard is designed with caution and transparency in mind.
 
 Heard does not make absolute claims.
 
-Instead of saying:
-
-> "This child is scared."
-
-It says:
-
-> "This may indicate fear. Confidence: 61%."
-
 The goal is to provide additional context, not definitive answers.
 
 Human judgment remains essential.
@@ -265,12 +257,7 @@ The LED matrix displays simple emotional animations that can be interpreted quic
 
 # 🧪 Key Lesson
 
-One of the most important lessons from building Heard was that accuracy alone is not enough.
-
-A useful AI system should also communicate uncertainty when appropriate.
-
-Sometimes a cautious answer is more valuable than a confident but incorrect one.
-
+Voice/Mic alone would be somehow difficult to classify autistic children emotion unlike neurotypical people but thats all we got, so its somehow like a research project 
 ---
 
 # 🚀 Future Development
@@ -287,7 +274,6 @@ Future versions may incorporate additional signals such as:
 
 - Audio
 - Movement
-- Physiological indicators
 
 Combining multiple signals could provide a more complete understanding of emotional state.
 
@@ -338,7 +324,6 @@ It is intended to be:
 It is not:
 
 - A medical diagnostic system
-- A replacement for caregivers, parents, or professionals
 - A perfect measure of emotional state
 
 ---
